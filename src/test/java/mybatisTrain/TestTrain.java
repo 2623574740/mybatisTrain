@@ -36,9 +36,9 @@ public class TestTrain {
 	public void test01() {
 		this.sqlSession = sqlsessionfactory.openSession();
 		PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
-		/**查
-		Person person = personMapper.selectAPerson(2);
-		System.out.println("查询结果："+person.toString());*/
+		/**查*/
+		Person person = personMapper.selectAPerson(1);
+		System.out.println("查询结果："+person.toString());
 		/**插入对象集合
 		List<Person> persons = new ArrayList<Person>();
 		persons.add(new Person(3,"1",1,"1"));
@@ -47,11 +47,11 @@ public class TestTrain {
 		persons.add(new Person(6,"6",6,"6"));
 		persons.add(new Person(7,"7",7,"7"));
 		persons.add(new Person(8,"8",8,"8"));
-		personMapper.insertPersons(persons);*/
+		personMapper.insertPersons(persons);
 		List<Person> persons = personMapper.selectPersons(3);
 		for (Person person : persons) {
 			System.out.println(person.toString());
-		}
+		}*/
 		/**person.setId(person.getId()+1);
 		person.setName("Alice");
 		增0

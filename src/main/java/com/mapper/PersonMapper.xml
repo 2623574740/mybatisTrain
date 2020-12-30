@@ -27,7 +27,7 @@
 	<delete id="deletePerson">
 		delete from person where id = ${id}
 	</delete>
-	<select id="selectAPerson" resultType="com.pojo.Person">
+	<select id="selectAPerson" resultType="Person">
 		select * from person where id = #{id}
 	</select>
 
