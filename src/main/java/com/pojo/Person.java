@@ -1,10 +1,19 @@
 package com.pojo;
 
 public class Person {
-	private Integer id;
-	private String name;
-	private Integer age;
-	private String email;
+	public Person() {
+		
+	}
+	public Person(Integer id,String name,Integer age,String email) {
+		this.setId(id);
+		this.setName(name);
+		this.setAge(age);
+		this.setEmail(email);
+	}
+	private Integer id = 0;
+	private String name = "";
+	private Integer age = 0;
+	private String email = "";
 	public Integer getId() {
 		return id;
 	}
@@ -31,6 +40,6 @@ public class Person {
 	}
 	@Override
 	public String toString() {
-		return String.format("id:%d,name:%s,age:%d,email:%s", this.id,this.name,this.age,this.email);
+		return String.format("id:%d  name:%s  age:%d  email:%s", this.id,this.name,this.age,this.email);
 	}
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.PersonMapper">
+	<insert id="insertAPerson1">
+		insert into person(name,age,email,id) values ( #{name}, #{age},#{email},#{id} )
+	</insert>
+	<insert id="insertAPerson" parameterType="com.pojo.Person">
+		insert into person(name,age,email,id) values ( #{person.name}, #{person.age},#{person.email},#{person.id} )
+	</insert>
+	<insert id="insertPersons" parameterType="java.util.List" >
+		insert into person(name,age,email,id) values 
+		<foreach collection="persons" item="item" index="index" separator="," >
+		( #{item.name}, #{item.age},#{item.email},#{item.id} )
+		</foreach>
+	</insert>
+	<parameterMap type="com.pojo.Person" id="parameterMapPerson">
+		<parameter property="id" resultMap="id"/>
+		<parameter property="name" resultMap="name"/>
+		<parameter property="age" resultMap="age"/>
+		<parameter property="email" resultMap="email"/>
+	</parameterMap>
+	<insert id="insertPersons2" parameterMap="parameterMapPerson">
+		insert into person(name,age,email,id) values ()
+	</insert>
+	<delete id="deletePerson">
+		delete from person where id = ${id}
+	</delete>
+	<select id="selectAPerson" resultType="com.pojo.Person">
+		select * from person where id = #{id}
+	</select>
+
+	<resultMap type="com.pojo.Person" id="Person">
+		<result column="id" property="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result column="name" property="name"/>
+		<result column="age" property="age"/>
+		<result column="email" property="email"/>
+	</resultMap>
+	<select id="selectPersons" resultType="com.pojo.Person">
+		select * from person where id > #{id}
+	</select>
+	<select id="selectPersons1" resultMap="Person">
+		select * from person where id > #{id}
+	</select>
+	<update id="modName">
+		update person set name = #{name} where id = #{id}
+	</update>
+	
+</mapper>
