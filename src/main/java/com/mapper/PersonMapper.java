@@ -16,6 +16,7 @@ public interface PersonMapper {
 			@Param("age") Integer age,
 			@Param("email") String email);
 	public void insertAPerson(@Param("person") Person person);
+	public void insertPersons2(@Param("persons") List<Person> persons);
 	public void insertPersons(@Param("persons") List<Person> persons);//将list<Person>插入数据库
 	/*删*/
 	public void deletePerson(@Param("id") Integer id);
