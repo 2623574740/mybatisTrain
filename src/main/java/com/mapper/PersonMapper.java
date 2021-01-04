@@ -16,14 +16,19 @@ public interface PersonMapper {
 			@Param("age") Integer age,
 			@Param("email") String email);
 	public void insertAPerson(@Param("person") Person person);
-	public void insertPersons2(@Param("persons") List<Person> persons);
+
 	public void insertPersons(@Param("persons") List<Person> persons);//将list<Person>插入数据库
 	/*删*/
 	public void deletePerson(@Param("id") Integer id);
 	/*查*/
 	public Person selectAPerson(Integer id);//查
 	public List<Person> selectPersons(@Param("id") Integer id);
+	public List<Person> selectPersons1(@Param("id") Integer id);
+	/*current：当前页，pagesize：每页数量*/
+	public List<Person> selectPersonsPage(@Param("current") Integer current,@Param("pagesize") Integer pagesize);
 	/*改*/
 	public void modName(@Param("id") Integer id,@Param("name") String name);
-
+	public void modPerson(@Param("person") Person person);
+	
+	public void modPersons(@Param("persons") List<Person> persons);
 }
