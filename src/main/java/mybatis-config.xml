@@ -28,7 +28,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="PersonMapper.xml" />
-		<mapper resource="com/mapper/PersonMapper.xml"/>
+		<package name="com.mapper"/>		
 	</mappers>
 </configuration>

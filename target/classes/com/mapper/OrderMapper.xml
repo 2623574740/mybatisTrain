@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.OrderMapper">
+	<sql id="field">id,create_time,subscriber,delivery_date,signfor</sql>
+	<sql id="insertField">#{order.id},#{order.create_time},#{order.subscriber},#{order.delivery_date},#{order.signfor}</sql>
+	<select id="selectAll" resultType="com.pojo.Order">
+		select <include refid="field"></include> from orderlist
+	</select>
+	<insert id="insertOrder" parameterType="com.pojo.Order">
+		insert into orderlist(<include refid="field"></include>) values
+		(<include refid="insertField"></include>);
+	</insert>
+</mapper>

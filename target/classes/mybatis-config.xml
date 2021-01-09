@@ -12,7 +12,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED" >
 				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://localhost:3306/train?characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC" />
+				<property name="url" value="jdbc:mysql://localhost:3306/train?characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowMultiQueries=true" />
 				<property name="username" value="root" />
 				<property name="password" value="root" />
 			</dataSource>
@@ -28,7 +28,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="PersonMapper.xml" />
-		<mapper resource="com/mapper/PersonMapper.xml"/>
+		<package name="com.mapper"/>		
 	</mappers>
 </configuration>

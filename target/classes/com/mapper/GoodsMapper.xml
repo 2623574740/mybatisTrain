@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.GoodsMapper">
+	<resultMap type="com.pojo.Goods" id="goodsMap">
+		<result column="name" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result column="unitprice" property="price" javaType="java.lang.Double" jdbcType="DECIMAL"/>
+		<result column="total" property="total" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+	</resultMap>
+	<select id="selectByName" resultMap="goodsMap">
+		select * from goods where name = #{name}
+	</select>
+	<!-- 统计商品总价格 -->
+	<resultMap type="com.pojo.GoodsList" id="goodsListMap">
+		<result column="name" property="name"/>
+		<result column="price" property="total_price"/>
+	</resultMap>
+	<select id="selectTotal" resultMap="goodsListMap">
+		SELECT name,total*unitprice price FROM goods group by name
+	</select>
+	<select id="selectAll" resultType="com.pojo.Goods">
+		select name,unitprice as price from goods
+	</select>
+</mapper>

@@ -2,11 +2,9 @@ package mybatisTrain;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -15,8 +13,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mapper.PersonMapper;
-import com.pojo.Person;
+import com.mapper.OrderMapper;
+import com.pojo.Order;
 
 public class TestTrain {
 	private SqlSessionFactory sqlsessionfactory = null;
@@ -31,22 +29,12 @@ public class TestTrain {
 	@Test//µ•∂¿ π”√mapper.xml
 	public void test() {
 		this.sqlSession = sqlsessionfactory.openSession();
-		PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
-		
-		List<Person> persons = new ArrayList<Person>();
-		persons.add(new Person(1,"1",1,"1"));
-		persons.add(new Person(2,"4",4,"4"));
-//		persons.add(new Person(3,"5",5,"5"));
-//		persons.add(new Person(4,"6",6,"6"));
-//		persons.add(new Person(5,"7",7,"7"));
-//		personMapper.insertPersons(persons);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("persons", persons);
-		//personMapper.modPersons(persons);
-		List<Person> list = personMapper.selectPersonsPage(0, 3);
-		for (Person person : list) {
-			System.out.println(person.toString());
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		List<Order> list = mapper.selectAll();
+		for (Order item : list) {
+			System.out.println(item.toString());
 		}
+		
 	}
 	@After
 	public void After() {
