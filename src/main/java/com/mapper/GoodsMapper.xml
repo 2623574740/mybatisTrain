@@ -3,9 +3,10 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.GoodsMapper">
+	<sql id="allFields">name,price price,total</sql>
 	<resultMap type="com.pojo.Goods" id="goodsMap">
 		<result column="name" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-		<result column="unitprice" property="price" javaType="java.lang.Double" jdbcType="DECIMAL"/>
+		<result column="price" property="price" javaType="java.lang.Double" jdbcType="DECIMAL"/>
 		<result column="total" property="total" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
 	</resultMap>
 	<select id="selectByName" resultMap="goodsMap">
@@ -17,9 +18,42 @@
 		<result column="price" property="total_price"/>
 	</resultMap>
 	<select id="selectTotal" resultMap="goodsListMap">
-		SELECT name,total*unitprice price FROM goods group by name
+		SELECT name,total*price price FROM goods group by name
 	</select>
 	<select id="selectAll" resultType="com.pojo.Goods">
-		select name,unitprice as price from goods
+		select name,price as price from goods
+	</select>
+	
+	<select id="selectGoodsByName" resultType="com.pojo.Goods">
+		select <include refid="allFields"></include> from goods
+		<where>
+			<choose>
+				<when test="names[0] == '饼干'">name = #{names[0]}</when>
+				<when test="names[1] == '果汁'">name = #{names[1]}</when>
+				<otherwise></otherwise>
+			</choose>
+		</where>
+	</select>
+	<update id="updateGoods" parameterType="com.pojo.Goods">
+		update goods
+		<set>
+			<if test=" newgoods.price gte 10">
+				price = #{newgoods.price},
+			</if>
+			<if test=" newgoods.total >= 0">
+				total = #{newgoods.total},
+			</if>
+		</set>
+		<where>
+			name = #{newgoods.name}
+		</where>
+	</update>
+	<select id="selectParam" resultType="java.lang.String">
+	<if test="_parameter eq null">
+	select '空参数' from dual
+	</if>
+	<if test="_parameter != null">
+	select #{_databaseId} from dual
+	</if>
 	</select>
 </mapper>

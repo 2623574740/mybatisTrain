@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,8 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mapper.OrderMapper;
-import com.pojo.Order;
+import com.mapper.GoodsMapper;
+import com.pojo.Goods;
 
 public class TestTrain {
 	private SqlSessionFactory sqlsessionfactory = null;
@@ -24,17 +23,15 @@ public class TestTrain {
 		String resource = "mybatis-config.xml";
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		this.sqlsessionfactory = new SqlSessionFactoryBuilder().build(inputStream);
-		
 	}
 	@Test//µ•∂¿ π”√mapper.xml
 	public void test() {
 		this.sqlSession = sqlsessionfactory.openSession();
-		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
-		List<Order> list = mapper.selectAll();
-		for (Order item : list) {
-			System.out.println(item.toString());
+		GoodsMapper mapper = sqlSession.getMapper(GoodsMapper.class);		
+		List<Goods> res = mapper.selectAll();
+		for (Goods goods : res) {
+			System.out.println(goods.toString());
 		}
-		
 	}
 	@After
 	public void After() {
